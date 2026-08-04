@@ -1,25 +1,68 @@
 import time
-import secrets
+import getpass
+#=======================#=======================#=======================#=======================
+names = [
+    "name1",
+    "name2",
+    "name3",
+    "name4",
+    "name5"
+]
 
-class userAccess():
-    def randomBool(self):
-        return bool(secrets.randbelow(2))
-    
-    def biometric(self):
-        print(" Place your thumb on the reader...")
-        time.sleep(3)
-        
-        print(" 🫆 Scanning identity")
-        time.sleep(3)
-        
-        while True: 
-            fingerprint = self.randomBool()
+credentials = [
+    "str1",
+    "str2",
+    "str3",
+    "str4",
+    "str5"
+]
+
+fingerPrint = True
+#=======================#=======================#=======================#=======================
+class Credentials:
+    def userPassCredentials(self):
+        while True:
+            print("=== Welcome ===")
+            username = input("Enter your name: ").strip()
+            print("")
             
-            if fingerprint is False:
-                print(" 🛑 Access denied")
-                return False   
+            password = getpass.getpass("Enter your password: ")
+            print("")
 
-            else:
-                time.sleep(3)
-                print(" 🆗 Access granted")
-                return True    
+            if username not in names:
+                print("Access denied — user not found.\n")
+                continue
+
+            if password not in credentials:
+                print("Access denied — password not found.\n")
+                continue
+
+            user_index = names.index(username)
+            password_index = credentials.index(password)
+
+            if user_index != password_index:
+                print("Access denied — name/password mismatch.\n")
+                continue
+
+            print(f"Welcome {username}!\n")
+            time.sleep(3)
+            print("Place your thumb on the reader...")
+            time.sleep(3)
+           
+            return True 
+#=======================#=======================#=======================#=======================
+class BiometricScan:
+    def biometric(self):
+        print(" 🫆 Scanning fingerprint...")
+        time.sleep(3)
+
+        if fingerPrint is False:
+            print(" 🛑 Access denied")
+            return False
+        else:
+            print(" 🆗 Access granted")
+            return True
+
+
+        
+
